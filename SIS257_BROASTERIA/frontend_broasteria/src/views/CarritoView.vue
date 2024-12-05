@@ -213,7 +213,7 @@ export default {
 
 <template>
   <div class="carrito-view">
-    <h1>Carrito de Compras</h1>
+    <h1 style="font-family: 'Times New Roman', sans-serif; font-weight: bold; color:white">Carrito de Compras</h1>
 
     <div v-if="cartStore.productos.length === 0" class="empty-cart">
       <p>Tu carrito está vacío. ¡Agrega algunos productos!</p>

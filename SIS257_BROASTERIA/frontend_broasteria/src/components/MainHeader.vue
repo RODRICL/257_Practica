@@ -7,7 +7,7 @@
 
 </script>
 <template>
-
+<div>
 <nav class="navbar navbar-expand-lg" :style="'background-color: ' + (location.path != '/' ? 'black' : '')">
         <div class="container">
             <div class="row">
@@ -20,34 +20,38 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Restaurant</a>
+                    <a class="navbar-brand" href="#">El sabor de pollo</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav main-nav  clear navbar-right ">
-                        <li>
-                            <RouterLink to="/" class="nav-link click-scroll">Inicio</RouterLink>
-                        </li>
                         <slot v-if="authStore.token">
-                            <li><a class="navactive color_animation" href="#top">HOME</a></li>
                             <li>
-                                <RouterLink to="/clientes" class="color_animation" href="#story">CLIENTES</RouterLink>
+                                <RouterLink to="/" class="nav-link click-scroll">Inicio</RouterLink>
                             </li>
                             <li>
-                                <RouterLink to="/productos" class="color_animation" href="#story">PRODUCTOS</RouterLink>
+                                <RouterLink to="/clientes" class="color_animation" href="#story">Clientes</RouterLink>
                             </li>
                             <li>
-                                <RouterLink to="/productoventa" class="color_animation" href="#story">PRODUCTOS DISPONIBLES</RouterLink>
+                                <RouterLink to="/categorias" class="color_animation" href="#story">Categorias</RouterLink>
                             </li>
                             <li>
-                                <RouterLink to="/carrito" class="color_animation" href="#story">CARRITO</RouterLink>
+                                <RouterLink to="/productos" class="color_animation" href="#story">Productos</RouterLink>
+                            </li>
+                            <li>
+                                <RouterLink to="/productoventa" class="color_animation" href="#story">Productos Disponibles</RouterLink>
+                            </li>
+                            <li>
+                                <RouterLink to="/carrito" class="color_animation" href="#story">Carrito</RouterLink>
+                            </li>
+                            <li>
+                                <a  @click="authStore.logout()" class="btn custom-btn d-lg-block d-none">Salir</a>
                             </li>
                             
                        
                         </slot>
                     </ul>
-                    <a  @click="authStore.logout()" class="btn custom-btn d-lg-block d-none">Salir</a>
                 </div><!-- /.navbar-collapse -->
             </div>
         </div><!-- /.container-fluid -->
@@ -64,8 +68,8 @@
             </div>
         </div>
     </div>
-
+</div>
 </template>
 
 
-<style scoped></style>
+<style></style>

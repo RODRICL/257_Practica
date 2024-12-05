@@ -16,8 +16,9 @@
   <main>
     <MainHeader />
     <RouterView />
-  </main>
+  
   <MainFooter />
+</main>
 </template>
 
 <style>

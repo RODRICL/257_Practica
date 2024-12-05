@@ -79,12 +79,13 @@ watch(
     <Dialog
       v-model:visible="dialogVisible"
       :header="props.modoEdicion ? 'Editar' : 'Crear'"
-      style="width: 25rem"
+      style="width: 25rem; color: white;"
     >
       <div class="flex items-center gap-4 mb-4">
-        <label for="categoria" class="font-semibold w-4">Categoria</label>
+        <label for="categoria" class="font-semibold w-4" style="color: white;">Categoria</label>
         <Select
           id="categoria"
+          style="color: white;"
           :options="categorias"
           v-model="producto.categoria"
           optionLabel="nombre"
@@ -134,16 +135,29 @@ watch(
       </div>
       <div class="flex justify-end gap-2">
         <Button
+        style="color: white;"
           type="button"
           label="Cancelar"
           icon="pi pi-times"
           severity="secondary"
           @click="dialogVisible = false"
         ></Button>
-        <Button type="button" label="Guardar" icon="pi pi-save" @click="handleSave"></Button>
+        <Button type="button" label="Guardar" icon="pi pi-save" style="color: white;" @click="handleSave "></Button>
       </div>
     </Dialog>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.custom-input {
+  background-color: rgb(0, 0, 0) !important; /* Fondo amarillo para los campos */
+  border: 1px solid #ccc; /* Borde gris para los campos */
+  color: rgb(255, 252, 252);  /* Color del texto en los inputs */
+  padding: 0.5rem;
+}
+
+.custom-input:focus {
+  border-color: #0a3058;  /* Color de borde azul cuando el campo está en foco */
+  outline: none;  /* Quitar el borde de enfoque predeterminado */
+}
+</style>

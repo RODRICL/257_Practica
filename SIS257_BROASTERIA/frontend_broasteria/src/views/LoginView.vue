@@ -43,10 +43,10 @@ function onSubmit() {
   width: 20%;
   min-width: 350px;
   max-width: 100%;
-  background: rgba(62, 153, 223, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   padding: 40px;
-  box-shadow: 0 4px 10px 4px rgba(17, 14, 206, 0.678);
+  box-shadow: 0 4px 10px 4px rgba(255, 255, 255, 0.678);
 }
 
 .form-label {
@@ -59,12 +59,12 @@ function onSubmit() {
   padding: 10px 15px;
   background: none;
   background-image: none;
-  border: 1px solid rgb(21, 6, 236);
-  color: rgb(26, 10, 253);
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(12, 12, 12);
 }
 
 .form-submit {
-  background: #ee5007;
+  background: #030303;
   border: none;
   border-radius: 5rem;
   color: white;

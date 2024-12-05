@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import type { Cliente } from '@/models/cliente'
+import type { Categoria } from '@/models/categoria'
 import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import { onMounted, ref } from 'vue'
 
-const ENDPOINT = 'clientes'
-const clientes = ref<Cliente[]>([])
+const ENDPOINT = 'categorias'
+const categorias = ref<Categoria[]>([])
 const emit = defineEmits(['edit'])
-const clienteDelete = ref<Cliente | null>(null)
+const categoriaDelete = ref<Categoria | null>(null)
 const mostrarConfirmDialog = ref<boolean>(false)
 
 async function obtenerLista() {
-  clientes.value = await http.get(ENDPOINT).then((response) => response.data)
+  categorias.value = await http.get(ENDPOINT).then((response) => response.data)
 }
 
-function emitirEdicion(cliente: Cliente) {
-  emit('edit', cliente)
+function emitirEdicion(categoria: Categoria) {
+  emit('edit', categoria)
 }
 
-function mostrarEliminarConfirm(cliente: Cliente) {
-  clienteDelete.value = cliente
+function mostrarEliminarConfirm(categoria: Categoria) {
+  categoriaDelete.value = categoria
   mostrarConfirmDialog.value = true
 }
 
 async function eliminar() {
-  await http.delete(`${ENDPOINT}/${clienteDelete.value?.id}`)
+  await http.delete(`${ENDPOINT}/${categoriaDelete.value?.id}`)
   obtenerLista()
   mostrarConfirmDialog.value = false
 }
@@ -38,42 +38,34 @@ defineExpose({ obtenerLista })
 
 <template>
   <div class="container">
-    <!-- Botón de Crear Nuevo Cliente -->
+    <!-- Botón de Crear Nueva Categoria -->
     <Button
-      label="Crear Nuevo Cliente"
+      label="Crear Nueva Categoria"
       icon="pi pi-plus"
       class="crear-boton"
       @click="emit('edit')" 
     />
-    <table class="table-cliente">
+    <table class="table-categoria">
       <thead>
         <tr>
           <th>Nro.</th>
-          <th>CI</th>
           <th>Nombre</th>
-          <th>Apellido Paterno</th>
-          <th>Apellido Materno</th>
-          <th>telefono</th>
-          <th>direccion</th>
+          <th>Descripción</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cliente, index) in clientes" :key="cliente.id">
+        <tr v-for="(categoria, index) in categorias" :key="categoria.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ cliente.ci }}</td>
-          <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.apellidoPaterno }}</td>
-          <td>{{ cliente.apellidoMaterno }}</td>
-          <td>{{ cliente.telefono }}</td>
-          <td>{{ cliente.direccion }}</td>
+          <td>{{ categoria.nombre }}</td>
+          <td>{{ categoria.descripcion }}</td>
           <td>
-            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(cliente)" />
+            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(categoria)" />
             <Button
               icon="pi pi-trash"
               aria-label="Eliminar"
               text
-              @click="mostrarEliminarConfirm(cliente)"
+              @click="mostrarEliminarConfirm(categoria)"
             />
           </td>
         </tr>
@@ -108,30 +100,30 @@ defineExpose({ obtenerLista })
 }
 
 /* Estilo para la tabla */
-.table-cliente {
+.table-categoria {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
   background-color: #f9f9f909;
 }
 
-.table-cliente th,
-.table-cliente td {
+.table-categoria th,
+.table-categoria td {
   padding: 12px 15px;
   text-align: left;
   border: 1px solid #ffffff;
 }
 
-.table-cliente th {
+.table-categoria th {
   background-color: #007bff;
   color: rgb(0, 0, 0);
 }
 
-.table-cliente tr:nth-child(even) {
+.table-categoria tr:nth-child(even) {
   background-color: #f2f2f21a;
 }
 
-.table-cliente tr:hover {
+.table-categoria tr:hover {
   background-color: #f1f1f1;
   color: black;
 }

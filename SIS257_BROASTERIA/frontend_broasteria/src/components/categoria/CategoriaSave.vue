@@ -1,18 +1,18 @@
 <script setup lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Cliente } from '@/models/cliente'
+import type { Categoria } from '@/models/categoria'
 import http from '@/plugins/axios'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
 import { computed, ref, watch } from 'vue'
 
-const ENDPOINT = 'clientes'
+const ENDPOINT = 'categorias'
 const props = defineProps({
   mostrar: Boolean,
-  cliente: {
-    type: Object as () => Cliente,
-    default: () => ({}) as Cliente,
+  categoria: {
+    type: Object as () => Categoria,
+    default: () => ({}) as Categoria,
   },
   modoEdicion: Boolean,
 })
@@ -25,31 +25,27 @@ const dialogVisible = computed({
   },
 })
 
-const cliente = ref<Cliente>({ ...props.cliente })
+const categoria = ref<Categoria>({ ...props.categoria })
 watch(
-  () => props.cliente,
+  () => props.categoria,
   (newVal) => {
-    cliente.value = { ...newVal }
+    categoria.value = { ...newVal }
   },
 )
 
 async function handleSave() {
   try {
     const body = {
-      nombre: cliente.value.nombre,
-      apellidoPaterno: cliente.value.apellidoPaterno,
-      apellidoMaterno: cliente.value.apellidoMaterno,
-      telefono: cliente.value.telefono,
-      direccion: cliente.value.direccion,
-      ci: cliente.value.ci,
+      nombre: categoria.value.nombre,
+      descripcion: categoria.value.descripcion,
     }
     if (props.modoEdicion) {
-      await http.patch(`${ENDPOINT}/${cliente.value.id}`, body)
+      await http.patch(`${ENDPOINT}/${categoria.value.id}`, body)
     } else {
       await http.post(ENDPOINT, body)
     }
     emit('guardar')
-    cliente.value = {} as Cliente
+    categoria.value = {} as Categoria
     dialogVisible.value = false
   } catch (error: any) {
     alert(error?.response?.data?.message)
@@ -65,59 +61,25 @@ async function handleSave() {
       style="width: 25rem"
     >
       <div class="flex items-center gap-4 mb-4">
-        <label for="ci" class="font-semibold w-4">CI</label>
-        <InputText id="ci" v-model="cliente.ci" class="flex-auto" autocomplete="off" autofocus />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
         <label for="nombre" class="font-semibold w-4">Nombre</label>
         <InputText
           id="nombre"
-          v-model="cliente.nombre"
+          v-model="categoria.nombre"
           class="flex-auto"
           autocomplete="off"
           autofocus
         />
       </div>
       <div class="flex items-center gap-4 mb-4">
-        <label for="apellidoPaterno" class="font-semibold w-4">Apellido Paterno</label>
+        <label for="descripcion" class="font-semibold w-4">Descripción</label>
         <InputText
-          id="apellidoPaterno"
-          v-model="cliente.apellidoPaterno"
+          id="descripcion"
+          v-model="categoria.descripcion"
           class="flex-auto"
           autocomplete="off"
           autofocus
         />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
-        <label for="apellidoMaterno" class="font-semibold w-4">Apellido Materno</label>
-        <InputText
-          id="apellidoMaterno"
-          v-model="cliente.apellidoMaterno"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
-        <label for="telefono" class="font-semibold w-4">Teléfono</label>
-        <InputText
-          id="telefono"
-          v-model="cliente.telefono"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
-        <label for="direccion" class="font-semibold w-4">Direccion</label>
-        <InputText
-          id="direccion"
-          v-model="cliente.direccion"
-          class="flex-auto"
-          autocomplete="off"
-          autofocus
-        />
-      </div>
+      </div>  
       <div class="flex justify-end gap-2">
         <Button
           type="button"

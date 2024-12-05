@@ -24,7 +24,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>Lista de Productos</h1>
+    <h1 style="font-family: 'Times New Roman', sans-serif; font-weight: bold; color:white">Lista de Productos</h1>
     <table>
       <thead>
         <tr>
@@ -52,7 +52,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
 /* Estilos básicos para la tabla */
 table {
   width: 100%;

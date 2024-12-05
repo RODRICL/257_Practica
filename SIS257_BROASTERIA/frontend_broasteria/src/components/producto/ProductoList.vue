@@ -68,8 +68,9 @@ defineExpose({ obtenerLista })
           <td>{{ producto.cantidadDisponible }}</td>
           <td>{{ producto.precio }}</td>
           <td>
-            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(producto)" />
+            <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(producto)" style="color: white;" />
             <Button
+            style="color: white;"
               icon="pi pi-trash"
               aria-label="Eliminar"
               text
@@ -94,7 +95,7 @@ defineExpose({ obtenerLista })
           severity="secondary"
           @click="mostrarConfirmDialog = false"
         />
-        <Button type="button" label="Eliminar" @click="eliminar" />
+        <Button type="button" label="Eliminar" @click="eliminar" style="color: white;"/>
       </div>
     </Dialog>
   </div>
@@ -134,12 +135,13 @@ defineExpose({ obtenerLista })
 
 .tabla-productos tr:hover {
   background-color: #f1f1f1;
+  color: black;
 }
 
 /* Estilo para el botón de crear nuevo */
 .crear-boton {
   margin-bottom: 20px;
-  background-color: #28a745; /* Color verde */
+  background-color: #007bff; /* Color verde */
   color: rgb(3, 3, 3);
   border: none;
   padding: 10px 20px;
@@ -148,7 +150,8 @@ defineExpose({ obtenerLista })
 }
 
 .crear-boton:hover {
-  background-color: #218838; /* Color verde oscuro al pasar el ratón */
+  background-color: #0a3058; /* Color verde oscuro al pasar el ratón */
+  color: black;
 }
 
 /* Estilos para el diálogo de confirmación */
